@@ -4,6 +4,7 @@
 
     <div class="row">
       <div class="Absolute-Center is-Responsive text-center">
+        <app-alert></app-alert>
         <app-logo></app-logo>
 
         <div class="card">

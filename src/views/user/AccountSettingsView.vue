@@ -5,7 +5,7 @@
       <app-alert></app-alert>
 
       <div id="main-content">
-        <p>content here</p>
+        <p>account settings here</p>
       </div>
     </main>
 </template>

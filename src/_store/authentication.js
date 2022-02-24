@@ -1,13 +1,13 @@
 import {config, requestHeader} from "../_helpers";
 import axios from 'axios'
 
-const user = localStorage.getItem('user');
+const kryptoLS = localStorage.getItem('krypto');
 
 let initialState = {
     authenticated: false
 };
 
-if ( user ) {
+if ( kryptoLS ) {
     initialState['authenticated'] = true;
 }
 
@@ -29,7 +29,7 @@ export const authentication = {
                     let requestResponse = response.data;
 
                     if ( requestResponse && requestResponse.token) {
-                        localStorage.setItem('user', requestResponse.token);
+                        localStorage.setItem('krypto', requestResponse.token);
                     }
 
                     commit('authenticationSuccess');
@@ -63,7 +63,7 @@ export const authentication = {
                     let requestResponse = response.data;
 
                     if ( requestResponse && requestResponse.token) {
-                        localStorage.setItem('user', requestResponse.token);
+                        localStorage.setItem('krypto', requestResponse.token);
                     }
 
                     commit('authenticationSuccess');
@@ -112,7 +112,7 @@ export const authentication = {
             })
         },
         logout({ commit }) {
-            localStorage.removeItem('user');
+            localStorage.removeItem('krypto');
 
             commit('logout');
         }
