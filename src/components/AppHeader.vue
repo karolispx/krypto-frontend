@@ -9,7 +9,7 @@
 
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
+          <li class="nav-item active">
             <RouterLink class="nav-link" to="/dashboard">Dashboard</RouterLink>
           </li>
 
@@ -33,3 +33,20 @@
     </div>
   </nav>
 </template>
+
+<script>
+export default {
+  computed: {
+    user() {
+      return this.$store.state.user.user
+    }
+  },
+
+  mounted() {
+    this.$store.dispatch('user/getAuthenticatedUser').then( response => {}, error => {
+      this.$store.dispatch('authentication/logout')
+    }); 
+  }
+}
+</script>
+

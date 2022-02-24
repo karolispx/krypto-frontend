@@ -9,8 +9,8 @@ export function requestHeader(authRequired = false) {
       'Content-Type': 'application/json'
   };
 
-  if ( authRequired && localStorage.getItem('user') ) {
-      requestHeaderReturn.Authorization = 'Bearer ' + localStorage.getItem('user')
+  if ( authRequired && localStorage.getItem('krypto') ) {
+      requestHeaderReturn.Authorization = 'Bearer ' + localStorage.getItem('krypto')
   }
 
   return requestHeaderReturn
