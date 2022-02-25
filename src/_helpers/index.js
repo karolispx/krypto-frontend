@@ -1,5 +1,8 @@
 // Config Variables
 export const config = {
+  'defaultMessages': {
+    'error': 'Something went wrong. Please try again later.',
+  },
   'apiUrl': 'http://localhost:8080/api',
 };
 
@@ -9,8 +12,8 @@ export function requestHeader(authRequired = false) {
       'Content-Type': 'application/json'
   };
 
-  if ( authRequired && localStorage.getItem('user') ) {
-      requestHeaderReturn.Authorization = 'Bearer ' + localStorage.getItem('user')
+  if ( authRequired && localStorage.getItem('krypto') ) {
+      requestHeaderReturn.Authorization = 'Bearer ' + localStorage.getItem('krypto')
   }
 
   return requestHeaderReturn

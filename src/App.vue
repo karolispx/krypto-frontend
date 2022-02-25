@@ -3,21 +3,23 @@ import { RouterView } from 'vue-router'
 </script>
 
 <template>
-
-  <div v-show="alert.display" :class="alert.type" role="alert">
-    {{ alert.message }}
-  </div>
-
   <RouterView />
 
+  <footer class="footer fixed-bottom text-center">
+      <div class="container">
+        <span class="text-muted">© 2022 Krypto. All rights reserved.</span>
+      </div>
+    </footer>
 </template>
 
-<script>
-  export default  {
-    computed: {
-      alert () {
-        return this.$store.state.alert
-      }
-    }
+<style>
+  #main-content {
+    padding-top: 30px;
   }
-</script>
+
+  footer.footer {
+    padding: 20px;
+    background: #fafafa;
+    border-top: 1px solid #e5e5e5;
+  }
+</style>

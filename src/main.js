@@ -3,14 +3,21 @@ import App from './App.vue'
 import router from './router'
 import { store } from './_store';
 
-import DefaultLoader from '@/components/DefaultLoader.vue';
+import AppHeader from '@/components/AppHeader.vue';
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap";
+import PageLoader from '@/components/loaders/PageLoader.vue';
+import ModalLoader from '@/components/loaders/ModalLoader.vue';
+
+import AppAlert from '@/components/alerts/AppAlert.vue';
+import ModalAlert from '@/components/alerts/ModalAlert.vue';
 
 const app = createApp(App)
 
-app.component("default-loader", DefaultLoader); 
+app.component("page-loader", PageLoader); 
+app.component("modal-loader", ModalLoader); 
+app.component("app-header", AppHeader); 
+app.component("app-alert", AppAlert); 
+app.component("modal-alert", ModalAlert); 
 
 app.use(router)
 app.use(store)

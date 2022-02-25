@@ -12,17 +12,6 @@ const router = createRouter({
     },
 
     {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: () => import('../views/user/DashboardView.vue'),
-      meta: {
-        title: 'Krypto - Dashboard',
-        loggedInAccessOnly: true
-      }
-    },
-
-  
-    {
       path: '/login',
       name: 'login',
       component: () => import('../views/authentication/LoginView.vue'),
@@ -58,6 +47,46 @@ const router = createRouter({
       meta: {
           title: 'Logout - Crypto Portfolio',
           logoutPage: true
+      }
+    },
+
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: () => import('../views/user/DashboardView.vue'),
+      meta: {
+        title: 'Krypto - Dashboard',
+        loggedInAccessOnly: true
+      }
+    },
+
+    {
+      path: '/account-settings',
+      name: 'account-settings',
+      component: () => import('../views/user/AccountSettingsView.vue'),
+      meta: {
+        title: 'Krypto - Account Settings',
+        loggedInAccessOnly: true
+      }
+    },
+
+    {
+      path: '/api-settings',
+      name: 'api-settings',
+      component: () => import('../views/user/APISettingsView.vue'),
+      meta: {
+        title: 'Krypto - API Settings',
+        loggedInAccessOnly: true
+      }
+    },
+
+    {
+      path: '/alerts',
+      name: 'alerts',
+      component: () => import('../views/user/AlertsView.vue'),
+      meta: {
+        title: 'Krypto - Alerts',
+        loggedInAccessOnly: true
       }
     },
   ]

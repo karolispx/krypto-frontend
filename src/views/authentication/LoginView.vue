@@ -1,9 +1,10 @@
 <template>
   <div class="container">
-    <default-loader v-if="pageLoader"></default-loader>
+    <page-loader v-if="pageLoader"></page-loader>
 
     <div class="row">
       <div class="Absolute-Center is-Responsive text-center">
+        <app-alert></app-alert>
         <app-logo></app-logo>
 
         <div class="card">
@@ -54,8 +55,8 @@
     },
     data() {
       return {
-        email: '',
-        password: '',
+        email: 'karolis@wits.ie',
+        password: 'secrets',
       }
     },
     methods: {
