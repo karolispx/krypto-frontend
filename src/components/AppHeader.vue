@@ -43,8 +43,11 @@ export default {
   },
 
   mounted() {
-    this.$store.dispatch('user/getAuthenticatedUser').then( response => {}, error => {
-      this.$store.dispatch('authentication/logout')
+    this.$store.dispatch('user/getAuthenticatedUser').then( response => {
+    }, error => {
+      this.$store.dispatch('alert/error', "Your session has expired. Please login again.");
+
+      this.$router.push('/logout');
     }); 
   }
 }

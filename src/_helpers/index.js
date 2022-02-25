@@ -1,5 +1,8 @@
 // Config Variables
 export const config = {
+  'defaultMessages': {
+    'error': 'Something went wrong. Please try again later.',
+  },
   'apiUrl': 'http://localhost:8080/api',
 };
 

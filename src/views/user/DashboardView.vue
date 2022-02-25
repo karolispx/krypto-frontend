@@ -1,4 +1,6 @@
 <template>
+    <page-loader v-if="pageLoader"></page-loader>
+
     <app-header></app-header>
 
     <main id="main" class="container">
@@ -12,17 +14,17 @@
             <div class="row" v-if="portfolioStatistics && portfolioStatistics.time">
               <div class="col-md">
                 <span>Total Value</span>
-                <h4 class="text-primary">€{{portfolioStatistics.value}}</h4>
+                <h4 class="text-primary">{{currencyFilter(portfolioStatistics.value)}}</h4>
               </div>
 
               <div class="col-md text-center">
                 <span>Cost Basis</span>
-                <h4 class="text-muted">€{{portfolioStatistics.cost}}</h4>
+                <h4 class="text-muted">{{currencyFilter(portfolioStatistics.cost)}}</h4>
               </div>
 
               <div class="col-md text-right">
                 <span>Unrealized Gains</span>
-                <h4 class="text-muted">€{{portfolioStatistics.gains}}</h4>
+                <h4 class="text-muted">{{currencyFilter(portfolioStatistics.gains)}}</h4>
               </div>
             </div>
 
@@ -46,7 +48,7 @@
               </div>
 
               <div class="col-md text-right">
-                <button class="btn btn-primary">Add Coin</button>
+                <button type="button" class="btn btn-primary" v-on:click="openCreateCoinModal">Add Coin</button>
               </div>
             </div>
 
@@ -58,8 +60,8 @@
                       <th scope="col">Coin</th>
                       <th scope="col">Balance</th>
                       <th scope="col">Cost</th>
-                      <th scope="col">ROI</th>
                       <th scope="col">Value</th>
+                      <th scope="col"></th>
                     </tr>
                   </thead>
 
@@ -67,9 +69,14 @@
                     <tr v-for="coin in coins" :key="coin._id">
                       <td>{{coin.cryptocurrency.name}}</td>
                       <td>{{coin.balance}}</td>
-                      <td>{{coin.cost}}</td>
-                      <td>ROI</td>
-                      <td>{{coin.value}}</td>
+                      <td>{{currencyFilter(coin.cost)}}</td>
+                      <td>{{currencyFilter(coin.value)}}</td>
+                      <td class="text-center">
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-secondary" v-on:click="editCoin(coin)">Edit</button>
+                            <button type="button" class="btn btn-sm btn-danger"  v-on:click="deleteCoin(coin)">Delete</button>
+                          </div>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -83,12 +90,49 @@
           </div>
         </div>
       </div>
+
+      <CreateCoinModal v-on:reload-portfolio="loadPortfolio"/>
+      <EditCoinModal v-show="editCoin" v-on:reload-portfolio="loadPortfolio" :coin="editCoinData"/>
+      <DeleteCoinModal v-show="deleteCoin" v-on:reload-portfolio="loadPortfolio" :coin="deleteCoinData"/>
     </main>
 </template>
 
 <script>
+import CreateCoinModal from '@/components/modals/CreateCoinModal.vue';
+import EditCoinModal from '@/components/modals/EditCoinModal.vue';
+import DeleteCoinModal from '@/components/modals/DeleteCoinModal.vue';
+
 export default {
+  data() {
+    return {
+      editCoinData: null,
+      deleteCoinData: null
+    }
+  },
+  components: {
+      CreateCoinModal,
+      EditCoinModal,
+      DeleteCoinModal
+  },
   computed: {
+    currencyFilter(){
+      return (value)=>{
+        if (typeof value !== "number") {
+            return value;
+        }
+
+        var formatter = new Intl.NumberFormat('en-IE', {
+            style: 'currency',
+            currency: 'EUR'
+        });
+
+        return formatter.format(value);
+      }
+    },
+    pageLoader() {
+      return this.$store.state.loader.pageLoader
+    },
+
     portfolioStatistics() {
       return this.$store.state.dashboard.portfolioStatistics
     },
@@ -99,15 +143,47 @@ export default {
 
     coins() {
       return this.$store.state.dashboard.coins
-    },
+    }
   },
 
-  mounted() {
-    this.$store.dispatch('loader/page', 'on');
+  methods: {
+    editCoin(value) {
+      this.editCoinData = {
+        id: value._id,
+        name: value.cryptocurrency.name,
+        balance: value.balance,
+        cost: value.cost
+      };
 
-    this.$store.dispatch('dashboard/getPortfolioStatistics').then( response => {
-      this.$store.dispatch('dashboard/getCoins').then( response => {
-        this.$store.dispatch('loader/page', 'off');
+      $('.edit-coin-modal').modal('show');
+    },
+
+    deleteCoin(value) {
+      this.deleteCoinData = {
+        id: value._id,
+        name: value.cryptocurrency.name
+      };
+
+      $('.delete-coin-modal').modal('show');
+    },
+
+    openCreateCoinModal() {
+      $('.create-coin-modal').modal('show');
+    },
+
+    loadPortfolio() {
+      this.$store.dispatch('loader/page', 'on');
+
+      this.$store.dispatch('dashboard/getPortfolioStatistics').then( response => {
+        this.$store.dispatch('dashboard/getCoins').then( response => {
+          this.$store.dispatch('loader/page', 'off');
+        }, error => {
+          this.$store.dispatch('loader/page', 'off');
+
+          this.$store.dispatch('alert/error', error);
+
+          console.log(error)
+        }); 
       }, error => {
         this.$store.dispatch('loader/page', 'off');
 
@@ -115,14 +191,11 @@ export default {
 
         console.log(error)
       }); 
+    }
+  },
 
-    }, error => {
-      this.$store.dispatch('loader/page', 'off');
-
-      this.$store.dispatch('alert/error', error);
-
-      console.log(error)
-    }); 
+  mounted() {
+    this.loadPortfolio();
   }
 }
 </script>
