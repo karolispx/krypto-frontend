@@ -69,7 +69,7 @@
         if (this.email && this.password && this.repeatpassword) {
           this.$store.dispatch('loader/page', 'on');
 
-          this.$store.dispatch( 'authentication/register', { email: this.email, password: this.password, repeatpassword: this.repeatpassword } ).then( response => {
+          this.$store.dispatch('authentication/register', { email: this.email, password: this.password, repeatpassword: this.repeatpassword } ).then( response => {
             this.$store.dispatch('loader/page', 'off');
 
             this.$store.dispatch('alert/success', response);

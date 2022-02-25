@@ -13,17 +13,17 @@
 
             <div class="row" v-if="portfolioStatistics && portfolioStatistics.time">
               <div class="col-md">
-                <span>Total Value</span>
+                <h6 class="card-title">Total Value</h6>
                 <h4 class="text-primary">{{currencyFilter(portfolioStatistics.value)}}</h4>
               </div>
 
               <div class="col-md text-center">
-                <span>Cost Basis</span>
+                <h6 class="card-title">Cost Basis</h6>
                 <h4 class="text-muted">{{currencyFilter(portfolioStatistics.cost)}}</h4>
               </div>
 
               <div class="col-md text-right">
-                <span>Unrealized Gains</span>
+                <h6 class="card-title">Unrealized Gains</h6>
                 <h4 class="text-muted">{{currencyFilter(portfolioStatistics.gains)}}</h4>
               </div>
             </div>
@@ -44,7 +44,8 @@
           <div class="card-header">
             <div class="row">
               <div class="col-md">
-                <p>Holdings</p>
+                <h5 class="card-title">Assets</h5>
+
               </div>
 
               <div class="col-md text-right">

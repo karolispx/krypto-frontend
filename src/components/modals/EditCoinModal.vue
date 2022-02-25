@@ -58,7 +58,7 @@
         if (this.coin.id && this.coin.balance && this.coin.cost) {
           this.$store.dispatch('loader/modal', 'on');
 
-          this.$store.dispatch( 'dashboard/editCoin', { id: this.coin.id, balance: this.coin.balance, cost: this.coin.cost } ).then( response => {
+          this.$store.dispatch('dashboard/editCoin', { id: this.coin.id, balance: this.coin.balance, cost: this.coin.cost } ).then( response => {
             this.$store.dispatch('loader/modal', 'off');
 
             this.$store.dispatch('alert/success', response);
