@@ -9,19 +9,19 @@
 
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
+          <li class="nav-item" v-bind:class="{ active: (currentRoute === 'dashboard') }">
             <RouterLink class="nav-link" to="/dashboard">Dashboard</RouterLink>
           </li>
 
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown" v-bind:class="{ active: (currentRoute === 'account-settings' || currentRoute === 'api-settings' || currentRoute === 'alerts') }">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Settings
             </a>
             
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <RouterLink class="dropdown-item" to="/account-settings">Account</RouterLink>
-              <RouterLink class="dropdown-item" to="/api-settings">API</RouterLink>
-              <RouterLink class="dropdown-item" to="/alerts">Alerts</RouterLink>
+              <RouterLink class="dropdown-item" v-bind:class="{ active: (currentRoute === 'account-settings') }" to="/account-settings">Account</RouterLink>
+              <RouterLink class="dropdown-item" v-bind:class="{ active: (currentRoute === 'api-settings') }" to="/api-settings">API</RouterLink>
+              <RouterLink class="dropdown-item" v-bind:class="{ active: (currentRoute === 'alerts') }" to="/alerts">Alerts</RouterLink>
             </div>
           </li>
 
@@ -39,6 +39,10 @@ export default {
   computed: {
     user() {
       return this.$store.state.user.user
+    },
+
+    currentRoute() {
+      return this.$route.name;
     }
   },
 
