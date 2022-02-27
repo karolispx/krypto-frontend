@@ -81,6 +81,15 @@ const router = createRouter({
     },
 
     {
+      path: '/dashboard/:token',
+      name: 'api-dashboard',
+      component: () => import('../views/public/APIDashboard.vue'),
+      meta: {
+        title: 'Krypto - API Dashboard'
+      }
+    },
+
+    {
       path: '/alerts',
       name: 'alerts',
       component: () => import('../views/user/AlertsView.vue'),
@@ -89,6 +98,19 @@ const router = createRouter({
         loggedInAccessOnly: true
       }
     },
+
+    {
+      path: '/404',
+      name: '404',
+      component: () => import('../views/public/404.vue'),
+      meta: {
+          title: 'Krypto - 404 Page Not Found'
+      }
+    },
+    {
+        path: "/:catchAll(.*)",
+        redirect: '/404'
+    }
   ]
 })
 

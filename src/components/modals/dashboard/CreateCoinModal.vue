@@ -63,10 +63,10 @@
         if (this.symbol && this.balance && this.cost) {
           this.$store.dispatch('loader/modal', 'on');
 
-          this.$store.dispatch( 'dashboard/createCoin', { symbol: this.symbol, balance: this.balance, cost: this.cost } ).then( response => {
+          this.$store.dispatch('dashboard/createCoin', { symbol: this.symbol, balance: this.balance, cost: this.cost } ).then( response => {
             this.$store.dispatch('loader/modal', 'off');
 
-            this.$store.dispatch('alert/success', response);
+            this.$store.dispatch('appAlert/success', response);
 
             $('.create-coin-modal').modal('hide');
 

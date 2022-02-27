@@ -1,26 +1,26 @@
 <template>
-  <div class="modal fade delete-coin-modal" tabindex="-1" role="dialog">
+  <div class="modal fade reset-alert-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Delete Coin</h5>
+          <h5 class="modal-title">Reset Alert</h5>
 
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
 
-        <form ref="deleteCoinForm" v-if="coin">
+        <form ref="resetAlertForm" v-if="alert">
           <div class="modal-body">
               <modal-alert></modal-alert>
 
-              <p>Are you sure you want to delete "<strong>{{ coin.name}} </strong>" from your portfolio?</p>
+              <p>Are you sure you want to reset this alert?</p>
           </div>
 
           <div class="modal-footer">
             <modal-loader v-if="modalLoader"></modal-loader>
 
-            <button :disabled="modalLoader" type="button" class="btn btn-primary" v-on:click="submitDeleteCoin">Yes</button>
+            <button :disabled="modalLoader" type="button" class="btn btn-primary" v-on:click="submitResetAlert">Yes</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
           </div>
         </form>
@@ -31,7 +31,7 @@
 
 <script>
   export default  {
-    props: ['coin'],
+    props: ['alert'],
 
     computed: {
       modalLoader() {
@@ -39,20 +39,20 @@
       }
     },
     methods: {
-      submitDeleteCoin() {
+      submitResetAlert() {
         this.$store.dispatch('modalAlert/clear');
 
-        if (this.coin.id) {
+        if (this.alert) {
           this.$store.dispatch('loader/modal', 'on');
 
-          this.$store.dispatch( 'dashboard/deleteCoin', { id: this.coin.id } ).then( response => {
+          this.$store.dispatch('alert/resetAlert', { id: this.alert } ).then( response => {
             this.$store.dispatch('loader/modal', 'off');
 
-            this.$store.dispatch('alert/success', response);
+            this.$store.dispatch('appAlert/success', response);
 
-            $('.delete-coin-modal').modal('hide');
+            $('.reset-alert-modal').modal('hide');
 
-            this.$emit('reload-portfolio')
+            this.$emit('reload-alerts')
           }, error => {
             this.$store.dispatch('loader/modal', 'off');
 

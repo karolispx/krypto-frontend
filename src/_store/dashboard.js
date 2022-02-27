@@ -165,7 +165,7 @@ export const dashboard = {
         getCoinsSuccess(state, response) {
             state.coins = response.coins;
         },
-        getCoinsStatisticsError(state) {
+        getCoinsError(state) {
             state.coins = [];
         }
 
