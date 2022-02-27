@@ -81,7 +81,7 @@ export default {
 
   methods: {
     submitChangeEmail() {
-        this.$store.dispatch('alert/clear');
+        this.$store.dispatch('appAlert/clear');
 
         if (this.email) {
           this.$store.dispatch('loader/page', 'on');
@@ -89,21 +89,21 @@ export default {
           this.$store.dispatch('user/changeEmail', { email: this.email } ).then( response => {
             this.$store.dispatch('loader/page', 'off');
 
-            this.$store.dispatch('alert/success', response);
+            this.$store.dispatch('appAlert/success', response);
 
             this.$router.push('/logout');
           }, error => {
             this.$store.dispatch('loader/page', 'off');
 
-            this.$store.dispatch('alert/error', error);
+            this.$store.dispatch('appAlert/error', error);
           }); 
         } else {
-          this.$store.dispatch('alert/error', 'Please provide all information.');
+          this.$store.dispatch('appAlert/error', 'Please provide all information.');
         }
     },
 
     submitChangePassword() {
-        this.$store.dispatch('alert/clear');
+        this.$store.dispatch('appAlert/clear');
 
         if (this.email) {
           this.$store.dispatch('loader/page', 'on');
@@ -111,16 +111,16 @@ export default {
           this.$store.dispatch('user/changePassword', { currentpassword: this.currentpassword, newpassword: this.newpassword, repeatpassword: this.repeatpassword } ).then( response => {
             this.$store.dispatch('loader/page', 'off');
 
-            this.$store.dispatch('alert/success', response);
+            this.$store.dispatch('appAlert/success', response);
 
             this.$router.push('/logout');
           }, error => {
             this.$store.dispatch('loader/page', 'off');
 
-            this.$store.dispatch('alert/error', error);
+            this.$store.dispatch('appAlert/error', error);
           }); 
         } else {
-          this.$store.dispatch('alert/error', 'Please provide all information.');
+          this.$store.dispatch('appAlert/error', 'Please provide all information.');
         }
     }
   },

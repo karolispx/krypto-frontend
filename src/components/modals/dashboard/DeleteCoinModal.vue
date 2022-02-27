@@ -48,7 +48,7 @@
           this.$store.dispatch('dashboard/deleteCoin', { id: this.coin.id } ).then( response => {
             this.$store.dispatch('loader/modal', 'off');
 
-            this.$store.dispatch('alert/success', response);
+            this.$store.dispatch('appAlert/success', response);
 
             $('.delete-coin-modal').modal('hide');
 

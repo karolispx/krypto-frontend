@@ -48,7 +48,7 @@
           this.$store.dispatch('APISettings/renewToken', { id: this.token } ).then( response => {
             this.$store.dispatch('loader/modal', 'off');
 
-            this.$store.dispatch('alert/success', response);
+            this.$store.dispatch('appAlert/success', response);
 
             $('.renew-token-modal').modal('hide');
 

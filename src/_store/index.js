@@ -1,23 +1,25 @@
 import { createStore } from 'vuex'
 
-import { alert } from './alert';
+import { appAlert } from './app-alert';
 import { modalAlert } from './modal-alert';
 import { authentication } from './authentication';
 import { loader } from './loader';
 import { user } from './user';
 import { dashboard } from './dashboard';
 import { APISettings } from './api-settings';
+import { alert } from './alert';
 import { APIDashboard } from './api-dashboard';
 
 export const store = createStore({
   modules: {
-    alert,
+    appAlert,
     modalAlert,
     authentication,
     loader,
     user,
     dashboard,
     APISettings,
+    alert,
     APIDashboard
   }
 })

@@ -115,7 +115,7 @@ export default {
       DeleteCoinModal
   },
   computed: {
-    currencyFilter(){
+    currencyFilter() {
       return (value)=>{
         if (typeof value !== "number") {
             return value;
@@ -129,6 +129,7 @@ export default {
         return formatter.format(value);
       }
     },
+
     pageLoader() {
       return this.$store.state.loader.pageLoader
     },
@@ -180,14 +181,14 @@ export default {
         }, error => {
           this.$store.dispatch('loader/page', 'off');
 
-          this.$store.dispatch('alert/error', error);
+          this.$store.dispatch('appAlert/error', error);
 
           console.log(error)
         }); 
       }, error => {
         this.$store.dispatch('loader/page', 'off');
 
-        this.$store.dispatch('alert/error', error);
+        this.$store.dispatch('appAlert/error', error);
 
         console.log(error)
       }); 

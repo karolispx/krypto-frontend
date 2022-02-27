@@ -48,7 +48,7 @@
           this.$store.dispatch('APISettings/deleteToken', { id: this.token } ).then( response => {
             this.$store.dispatch('loader/modal', 'off');
 
-            this.$store.dispatch('alert/success', response);
+            this.$store.dispatch('appAlert/success', response);
 
             $('.delete-token-modal').modal('hide');
 

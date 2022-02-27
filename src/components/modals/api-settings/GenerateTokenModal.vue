@@ -70,7 +70,7 @@
             this.$store.dispatch('APISettings/generateToken', { type: this.endpointType, symbol: this.symbol } ).then( response => {
               this.$store.dispatch('loader/modal', 'off');
 
-              this.$store.dispatch('alert/success', response);
+              this.$store.dispatch('appAlert/success', response);
 
               $('.generate-token-modal').modal('hide');
 

@@ -1,26 +1,26 @@
 <template>
-  <div class="modal fade clear-token-usage-modal" tabindex="-1" role="dialog">
+  <div class="modal fade reset-alert-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">CLear Token Usage</h5>
+          <h5 class="modal-title">Reset Alert</h5>
 
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
 
-        <form ref="clearTokenUsageForm" v-if="token">
+        <form ref="resetAlertForm" v-if="alert">
           <div class="modal-body">
               <modal-alert></modal-alert>
 
-              <p>Are you sure you want to clear all usage for this token?</p>
+              <p>Are you sure you want to reset this alert?</p>
           </div>
 
           <div class="modal-footer">
             <modal-loader v-if="modalLoader"></modal-loader>
 
-            <button :disabled="modalLoader" type="button" class="btn btn-primary" v-on:click="submitClearTokenUsage">Yes</button>
+            <button :disabled="modalLoader" type="button" class="btn btn-primary" v-on:click="submitResetAlert">Yes</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
           </div>
         </form>
@@ -31,7 +31,7 @@
 
 <script>
   export default  {
-    props: ['token'],
+    props: ['alert'],
 
     computed: {
       modalLoader() {
@@ -39,20 +39,20 @@
       }
     },
     methods: {
-      submitClearTokenUsage() {
+      submitResetAlert() {
         this.$store.dispatch('modalAlert/clear');
 
-        if (this.token) {
+        if (this.alert) {
           this.$store.dispatch('loader/modal', 'on');
 
-          this.$store.dispatch('APISettings/clearTokenUsage', { id: this.token } ).then( response => {
+          this.$store.dispatch('alert/resetAlert', { id: this.alert } ).then( response => {
             this.$store.dispatch('loader/modal', 'off');
 
             this.$store.dispatch('appAlert/success', response);
 
-            $('.clear-token-usage-modal').modal('hide');
+            $('.reset-alert-modal').modal('hide');
 
-            this.$emit('reload-settings')
+            this.$emit('reload-alerts')
           }, error => {
             this.$store.dispatch('loader/modal', 'off');
 

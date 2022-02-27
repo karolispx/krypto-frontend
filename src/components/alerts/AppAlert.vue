@@ -1,14 +1,14 @@
 <template>
-  <div id="app-alert" v-show="alert.display" :class="alert.type" role="alert">
-    {{ alert.message }}
+  <div id="app-alert" v-show="appAlert.display" :class="appAlert.type" role="alert">
+    {{ appAlert.message }}
   </div>
 </template>
 
 <script>
   export default  {
     computed: {
-      alert () {
-        return this.$store.state.alert
+      appAlert () {
+        return this.$store.state.appAlert
       }
     }
   }

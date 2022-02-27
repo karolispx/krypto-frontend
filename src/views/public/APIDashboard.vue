@@ -94,7 +94,7 @@
           console.log(error)
           this.$store.dispatch('loader/page', 'off');
 
-          this.$store.dispatch('alert/error', error);
+          this.$store.dispatch('appAlert/error', error);
 
           this.timer = this.refreshIn;
 

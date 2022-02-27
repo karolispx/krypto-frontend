@@ -61,7 +61,7 @@
           this.$store.dispatch('dashboard/editCoin', { id: this.coin.id, balance: this.coin.balance, cost: this.coin.cost } ).then( response => {
             this.$store.dispatch('loader/modal', 'off');
 
-            this.$store.dispatch('alert/success', response);
+            this.$store.dispatch('appAlert/success', response);
 
             $('.edit-coin-modal').modal('hide');
 

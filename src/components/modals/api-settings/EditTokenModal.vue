@@ -67,7 +67,7 @@
             this.$store.dispatch('APISettings/updateToken', { id: this.token.id, type: this.token.endpointType, symbol: this.token.symbol } ).then( response => {
               this.$store.dispatch('loader/modal', 'off');
 
-              this.$store.dispatch('alert/success', response);
+              this.$store.dispatch('appAlert/success', response);
 
               $('.edit-token-modal').modal('hide');
 
