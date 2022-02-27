@@ -98,6 +98,19 @@ const router = createRouter({
         loggedInAccessOnly: true
       }
     },
+
+    {
+      path: '/404',
+      name: '404',
+      component: () => import('../views/public/404.vue'),
+      meta: {
+          title: 'Krypto - 404 Page Not Found'
+      }
+    },
+    {
+        path: "/:catchAll(.*)",
+        redirect: '/404'
+    }
   ]
 })
 
