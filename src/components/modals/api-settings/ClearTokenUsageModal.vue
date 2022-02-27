@@ -1,26 +1,26 @@
 <template>
-  <div class="modal fade delete-coin-modal" tabindex="-1" role="dialog">
+  <div class="modal fade clear-token-usage-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Delete Coin</h5>
+          <h5 class="modal-title">CLear Token Usage</h5>
 
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
 
-        <form ref="deleteCoinForm" v-if="coin">
+        <form ref="clearTokenUsageForm" v-if="token">
           <div class="modal-body">
               <modal-alert></modal-alert>
 
-              <p>Are you sure you want to delete "<strong>{{ coin.name}} </strong>" from your portfolio?</p>
+              <p>Are you sure you want to clear all usage for this token?</p>
           </div>
 
           <div class="modal-footer">
             <modal-loader v-if="modalLoader"></modal-loader>
 
-            <button :disabled="modalLoader" type="button" class="btn btn-primary" v-on:click="submitDeleteCoin">Yes</button>
+            <button :disabled="modalLoader" type="button" class="btn btn-primary" v-on:click="submitClearTokenUsage">Yes</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
           </div>
         </form>
@@ -31,7 +31,7 @@
 
 <script>
   export default  {
-    props: ['coin'],
+    props: ['token'],
 
     computed: {
       modalLoader() {
@@ -39,20 +39,20 @@
       }
     },
     methods: {
-      submitDeleteCoin() {
+      submitClearTokenUsage() {
         this.$store.dispatch('modalAlert/clear');
 
-        if (this.coin.id) {
+        if (this.token) {
           this.$store.dispatch('loader/modal', 'on');
 
-          this.$store.dispatch( 'dashboard/deleteCoin', { id: this.coin.id } ).then( response => {
+          this.$store.dispatch('APISettings/clearTokenUsage', { id: this.token } ).then( response => {
             this.$store.dispatch('loader/modal', 'off');
 
             this.$store.dispatch('alert/success', response);
 
-            $('.delete-coin-modal').modal('hide');
+            $('.clear-token-usage-modal').modal('hide');
 
-            this.$emit('reload-portfolio')
+            this.$emit('reload-settings')
           }, error => {
             this.$store.dispatch('loader/modal', 'off');
 

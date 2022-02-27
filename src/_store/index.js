@@ -6,6 +6,8 @@ import { authentication } from './authentication';
 import { loader } from './loader';
 import { user } from './user';
 import { dashboard } from './dashboard';
+import { APISettings } from './api-settings';
+import { APIDashboard } from './api-dashboard';
 
 export const store = createStore({
   modules: {
@@ -14,6 +16,8 @@ export const store = createStore({
     authentication,
     loader,
     user,
-    dashboard
+    dashboard,
+    APISettings,
+    APIDashboard
   }
 })

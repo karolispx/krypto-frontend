@@ -81,6 +81,15 @@ const router = createRouter({
     },
 
     {
+      path: '/dashboard/:token',
+      name: 'api-dashboard',
+      component: () => import('../views/public/APIDashboard.vue'),
+      meta: {
+        title: 'Krypto - API Dashboard'
+      }
+    },
+
+    {
       path: '/alerts',
       name: 'alerts',
       component: () => import('../views/user/AlertsView.vue'),

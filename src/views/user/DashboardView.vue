@@ -14,17 +14,17 @@
             <div class="row" v-if="portfolioStatistics && portfolioStatistics.time">
               <div class="col-md">
                 <h6 class="card-title">Total Value</h6>
-                <h4 class="text-primary">{{currencyFilter(portfolioStatistics.value)}}</h4>
+                <h4 class="text-primary">{{ currencyFilter(portfolioStatistics.value) }}</h4>
               </div>
 
               <div class="col-md text-center">
                 <h6 class="card-title">Cost Basis</h6>
-                <h4 class="text-muted">{{currencyFilter(portfolioStatistics.cost)}}</h4>
+                <h4 class="text-muted">{{ currencyFilter(portfolioStatistics.cost) }}</h4>
               </div>
 
               <div class="col-md text-right">
                 <h6 class="card-title">Unrealized Gains</h6>
-                <h4 class="text-muted">{{currencyFilter(portfolioStatistics.gains)}}</h4>
+                <h4 class="text-muted">{{ currencyFilter(portfolioStatistics.gains) }}</h4>
               </div>
             </div>
 
@@ -45,7 +45,6 @@
             <div class="row">
               <div class="col-md">
                 <h5 class="card-title">Assets</h5>
-
               </div>
 
               <div class="col-md text-right">
@@ -73,10 +72,10 @@
                       <td>{{currencyFilter(coin.cost)}}</td>
                       <td>{{currencyFilter(coin.value)}}</td>
                       <td class="text-center">
-                          <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-sm btn-secondary" v-on:click="editCoin(coin)">Edit</button>
-                            <button type="button" class="btn btn-sm btn-danger"  v-on:click="deleteCoin(coin)">Delete</button>
-                          </div>
+                        <div class="btn-group" role="group">
+                          <button type="button" class="btn btn-sm btn-secondary" v-on:click="editCoin(coin)">Edit</button>
+                          <button type="button" class="btn btn-sm btn-danger" v-on:click="deleteCoin(coin)">Delete</button>
+                        </div>
                       </td>
                     </tr>
                   </tbody>
@@ -99,9 +98,9 @@
 </template>
 
 <script>
-import CreateCoinModal from '@/components/modals/CreateCoinModal.vue';
-import EditCoinModal from '@/components/modals/EditCoinModal.vue';
-import DeleteCoinModal from '@/components/modals/DeleteCoinModal.vue';
+import CreateCoinModal from '@/components/modals/dashboard/CreateCoinModal.vue';
+import EditCoinModal from '@/components/modals/dashboard/EditCoinModal.vue';
+import DeleteCoinModal from '@/components/modals/dashboard/DeleteCoinModal.vue';
 
 export default {
   data() {
