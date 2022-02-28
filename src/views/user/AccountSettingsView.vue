@@ -105,7 +105,7 @@ export default {
     submitChangePassword() {
         this.$store.dispatch('appAlert/clear');
 
-        if (this.email) {
+        if (this.email && this.currentpassword && this.newpassword && this.repeatpassword) {
           this.$store.dispatch('loader/page', 'on');
 
           this.$store.dispatch('user/changePassword', { currentpassword: this.currentpassword, newpassword: this.newpassword, repeatpassword: this.repeatpassword } ).then( response => {

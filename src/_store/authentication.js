@@ -48,6 +48,7 @@ export const authentication = {
                 });
             })
         },
+
         register( { commit }, { email, password, repeatpassword } ) {
             return new Promise((resolve, reject) => {
                 axios({
@@ -82,6 +83,7 @@ export const authentication = {
                 });
             })
         },
+
         resetPassword( { commit }, { email } ) {
             return new Promise((resolve, reject) => {
                 axios({
@@ -111,6 +113,40 @@ export const authentication = {
                 });
             })
         },
+        
+        resetPasswordFlow( { commit }, { token, email, newpassword, repeatpassword } ) {
+            return new Promise((resolve, reject) => {
+                axios({
+                    url: config.apiUrl + '/password-reset/' + token,
+                    method: 'POST',
+                    headers: requestHeader(),
+                    data: {
+                        email: email,
+                        newpassword: newpassword,
+                        repeatpassword: repeatpassword
+                    }
+                }).then(response => {
+                    let requestResponse = response.data;
+
+                    console.log(requestResponse)
+                    if ( requestResponse && requestResponse.message) {
+                        resolve(requestResponse.message);
+                    } else {
+                        resolve("Something went wrong. Please try again later.");
+                    }
+
+                }).catch(error => {
+                    let errorMessage = "Something went wrong. Please try again later.";
+
+                    if ( error.response && error.response.data.message ) {
+                        errorMessage = error.response.data.message;
+                    }
+
+                    reject(errorMessage);
+                });
+            })
+        },
+
         logout({ commit }) {
             localStorage.removeItem('krypto');
 
