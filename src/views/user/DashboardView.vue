@@ -8,10 +8,10 @@
 
       <div id="main-content">
 
-        <div class="card">
+        <div class="card" v-if="portfolioStatistics && portfolioStatistics.time">
           <div class="card-header">
 
-            <div class="row" v-if="portfolioStatistics && portfolioStatistics.time">
+            <div class="row">
               <div class="col-md">
                 <h6 class="card-title">Total Value</h6>
                 <h4 class="text-primary">{{ currencyFilter(portfolioStatistics.value) }}</h4>
@@ -24,19 +24,28 @@
 
               <div class="col-md text-right">
                 <h6 class="card-title">Unrealized Gains</h6>
-                <h4 class="text-muted">{{ currencyFilter(portfolioStatistics.gains) }}</h4>
+                <h4 class="text-success" v-bind:class="{ 'text-danger': (portfolioStatistics.gains < 0) }">{{ currencyFilter(portfolioStatistics.gains) }}</h4>
               </div>
             </div>
 
-            <p v-else class="mb-0 text-center">No data to show yet. Add some coins!</p>
-
-            <div v-if="chart && chart.length" class="card mt-4">
+            <div v-if="chart && chart.time" class="card mt-4">
               <div class="card-body">
-                <p>Chart</p>
+
+                <LineChart :chartData="chart" />
+              </div>
+
+              <div v-if="portfolioStatistics && portfolioStatistics.time" class="card-footer mt-2" style="border-top: 1px solid rgba(0,0,0,.125);">
+                <div class="row">
+                  <div class="col-md">
+                    <p class="mb-0"><small>Chart last updated: {{chart.time}}</small></p>
+                  </div>
+
+                  <div class="col-md text-right">
+                    <button type="button" class="btn btn-sm btn-secondary" v-on:click="forceChartReload">Force Chart Reload</button>
+                  </div>
+                </div>
               </div>
             </div>
-
-            <p v-if="portfolioStatistics && portfolioStatistics.time" class="text-right mt-2 mb-0">Last updated: {{portfolioStatistics.time}}</p>
           </div>
         </div>
 
@@ -98,6 +107,11 @@
 </template>
 
 <script>
+import { LineChart } from 'vue-chart-3';
+import { Chart, registerables } from "chart.js";
+
+Chart.register(...registerables);
+
 import CreateCoinModal from '@/components/modals/dashboard/CreateCoinModal.vue';
 import EditCoinModal from '@/components/modals/dashboard/EditCoinModal.vue';
 import DeleteCoinModal from '@/components/modals/dashboard/DeleteCoinModal.vue';
@@ -106,14 +120,17 @@ export default {
   data() {
     return {
       editCoinData: null,
-      deleteCoinData: null
+      deleteCoinData: null,
     }
   },
+
   components: {
+      LineChart,
       CreateCoinModal,
       EditCoinModal,
       DeleteCoinModal
   },
+
   computed: {
     currencyFilter() {
       return (value)=>{
@@ -172,10 +189,14 @@ export default {
       $('.create-coin-modal').modal('show');
     },
 
-    loadPortfolio() {
+    forceChartReload() {
+      this.loadPortfolio(true);
+    },
+
+    loadPortfolio(force = false) {
       this.$store.dispatch('loader/page', 'on');
 
-      this.$store.dispatch('dashboard/getPortfolioStatistics').then( response => {
+      this.$store.dispatch('dashboard/getPortfolioStatistics', { force: force }).then( response => {
         this.$store.dispatch('dashboard/getCoins').then( response => {
           this.$store.dispatch('loader/page', 'off');
         }, error => {

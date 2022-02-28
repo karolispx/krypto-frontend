@@ -12,7 +12,7 @@ export const APIDashboard = {
 
             return new Promise((resolve, reject) => {
                 axios({
-                    url: config.apiUrl + '/dashboard/'+ data.token,
+                    url: config.apiUrl + '/endpoint-dashboard/'+ data.token,
                     method: 'GET',
                     headers: requestHeader(),
                 }).then(response => {

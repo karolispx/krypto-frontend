@@ -55,7 +55,7 @@
     },
     data() {
       return {
-        email: 'karolis@wits.ie',
+        email: 'k.pliauskys@gmail.com',
         password: 'secrets',
       }
     },
