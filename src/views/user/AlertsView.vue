@@ -30,7 +30,7 @@
                         <div class="col-md">
                           <p class="mb-0">
                             <strong>Notify when {{ getNotifyText(alert.notify) }} {{ getRuleText(alert.rule) }} {{ currencyFilter(alert.number) }}</strong>
-                            <span class="text-danger" v-if="alert.fired"><br>This alert has been fired.</span>
+                            <span class="text-danger" v-if="alert.fired"><br>This alert has been triggered.</span>
                           </p>
                         </div>
 
