@@ -42,6 +42,16 @@ const router = createRouter({
     },
 
     {
+      path: '/reset-password/:token',
+      name: 'reset-password-flow',
+      component: () => import('../views/authentication/ResetPasswordFlowView.vue'),
+      meta: {
+        title: 'Krypto - Reset Your Password',
+        loggedOutAccessOnly: true
+      }
+    },
+
+    {
       path: '/logout',
       name: 'logout',
       meta: {

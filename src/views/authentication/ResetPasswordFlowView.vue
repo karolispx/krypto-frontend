@@ -9,12 +9,20 @@
         
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">Reset Password</h5>
+            <h5 class="card-title">Reset Your Password</h5>
 
             <div class="col-sm-12">
               <form ref="resetPasswordForm" class="mt-3">
                 <div class="form-group input-group mb-2">
-                  <input :disabled="pageLoader" class="form-control" type="text" v-model="email" placeholder="Email Address"/>          
+                  <input :disabled="pageLoader" class="form-control" type="text" v-model="email" placeholder="Confirm Email Address"/>          
+                </div>
+
+                <div class="form-group input-group mb-2">
+                  <input :disabled="pageLoader" class="form-control" type="password" v-model="newpassword" placeholder="New Password"/>     
+                </div>
+
+                <div class="form-group input-group mb-2">
+                  <input :disabled="pageLoader" class="form-control" type="password" v-model="repeatpassword" placeholder="Repeat New Password"/>     
                 </div>
 
                 <div class="form-group mb-2">
@@ -45,26 +53,32 @@
     computed: {
       pageLoader() {
         return this.$store.state.loader.pageLoader
-      }
+      },
+
+      token() {
+        return this.$route.params.token
+      },
     },
     data() {
       return {
-        email: ''
+        email: '',
+        newpassword: '',
+        repeatpassword: '',
       }
     },
     methods: {
       submitResetPassword() {
         this.$store.dispatch('appAlert/clear');
 
-        if (this.email) {
+        if (this.token && this.email && this.newpassword && this.repeatpassword) {
           this.$store.dispatch('loader/page', 'on');
 
-          this.$store.dispatch( 'authentication/resetPassword', { email: this.email } ).then( response => {
+          this.$store.dispatch( 'authentication/resetPasswordFlow', { token: this.token, email: this.email, newpassword: this.newpassword, repeatpassword: this.repeatpassword } ).then( response => {
             this.$store.dispatch('loader/page', 'off');
 
-            this.email = ""
-            
             this.$store.dispatch('appAlert/success', response);
+
+            this.$router.push('/login');
           }, error => {
             this.$store.dispatch('loader/page', 'off');
 
@@ -74,6 +88,14 @@
           this.$store.dispatch('appAlert/error', 'Please provide all information.');
         }
       } 
+    },
+
+    created() {
+      if (!this.token) {
+        this.$store.dispatch('appAlert/error', "No password reset token detected.");
+
+        this.$router.push('/login');
+      }
     }
   }
 </script>
