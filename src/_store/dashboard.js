@@ -14,12 +14,18 @@ export const dashboard = {
         chart: null
     },
     actions: {
-        getPortfolioStatistics( { commit } ) {
+        getPortfolioStatistics( { commit }, data = false ) {
             commit('getPortfolioStatisticsRequest');
 
+            let requestUrl = config.apiUrl + '/dashboard';
+
+            if (data.force && data.force === true) {
+                requestUrl += "/force"
+            }
+            
             return new Promise((resolve, reject) => {
                 axios({
-                    url: config.apiUrl + '/dashboard',
+                    url: requestUrl,
                     method: 'GET',
                     headers: requestHeader(true),
                 }).then(response => {
