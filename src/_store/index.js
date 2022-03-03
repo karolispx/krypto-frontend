@@ -9,6 +9,8 @@ import { dashboard } from './dashboard';
 import { APISettings } from './api-settings';
 import { alert } from './alert';
 import { APIDashboard } from './api-dashboard';
+import { blockchain } from './blockchain';
+import { wallet } from './wallet';
 
 export const store = createStore({
   modules: {
@@ -20,6 +22,8 @@ export const store = createStore({
     dashboard,
     APISettings,
     alert,
-    APIDashboard
+    APIDashboard,
+    blockchain,
+    wallet
   }
 })

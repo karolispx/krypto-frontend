@@ -13,6 +13,10 @@
             <RouterLink class="nav-link" to="/dashboard">Dashboard</RouterLink>
           </li>
 
+          <li class="nav-item" v-bind:class="{ active: (currentRoute === 'wallets') }">
+            <RouterLink class="nav-link" to="/wallets">Wallets</RouterLink>
+          </li>
+
           <li class="nav-item dropdown" v-bind:class="{ active: (currentRoute === 'account-settings' || currentRoute === 'api-settings' || currentRoute === 'alerts') }">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Settings
