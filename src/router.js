@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import {store} from "../_store";
+import {store} from "./_store";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,7 +14,7 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('../views/authentication/LoginView.vue'),
+      component: () => import('./views/authentication/LoginView.vue'),
       meta: {
         title: 'Krypto - Login',
         loggedOutAccessOnly: true
@@ -24,7 +24,7 @@ const router = createRouter({
     {
       path: '/register',
       name: 'register',
-      component: () => import('../views/authentication/RegisterView.vue'),
+      component: () => import('./views/authentication/RegisterView.vue'),
       meta: {
         title: 'Krypto - Register',
         loggedOutAccessOnly: true
@@ -34,7 +34,7 @@ const router = createRouter({
     {
       path: '/reset-password',
       name: 'reset-password',
-      component: () => import('../views/authentication/ResetPasswordView.vue'),
+      component: () => import('./views/authentication/ResetPasswordView.vue'),
       meta: {
         title: 'Krypto - Reset Password',
         loggedOutAccessOnly: true
@@ -44,7 +44,7 @@ const router = createRouter({
     {
       path: '/reset-password/:token',
       name: 'reset-password-flow',
-      component: () => import('../views/authentication/ResetPasswordFlowView.vue'),
+      component: () => import('./views/authentication/ResetPasswordFlowView.vue'),
       meta: {
         title: 'Krypto - Reset Your Password',
         loggedOutAccessOnly: true
@@ -63,7 +63,7 @@ const router = createRouter({
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: () => import('../views/user/DashboardView.vue'),
+      component: () => import('./views/user/DashboardView.vue'),
       meta: {
         title: 'Krypto - Dashboard',
         loggedInAccessOnly: true
@@ -71,9 +71,19 @@ const router = createRouter({
     },
 
     {
+      path: '/wallets',
+      name: 'wallets',
+      component: () => import('./views/user/WalletsView.vue'),
+      meta: {
+        title: 'Krypto - Wallets',
+        loggedInAccessOnly: true
+      }
+    },
+
+    {
       path: '/account-settings',
       name: 'account-settings',
-      component: () => import('../views/user/AccountSettingsView.vue'),
+      component: () => import('./views/user/AccountSettingsView.vue'),
       meta: {
         title: 'Krypto - Account Settings',
         loggedInAccessOnly: true
@@ -83,7 +93,7 @@ const router = createRouter({
     {
       path: '/api-settings',
       name: 'api-settings',
-      component: () => import('../views/user/APISettingsView.vue'),
+      component: () => import('./views/user/APISettingsView.vue'),
       meta: {
         title: 'Krypto - API Settings',
         loggedInAccessOnly: true
@@ -93,7 +103,7 @@ const router = createRouter({
     {
       path: '/dashboard/:token',
       name: 'api-dashboard',
-      component: () => import('../views/public/APIDashboard.vue'),
+      component: () => import('./views/public/APIDashboard.vue'),
       meta: {
         title: 'Krypto - API Dashboard'
       }
@@ -102,7 +112,7 @@ const router = createRouter({
     {
       path: '/alerts',
       name: 'alerts',
-      component: () => import('../views/user/AlertsView.vue'),
+      component: () => import('./views/user/AlertsView.vue'),
       meta: {
         title: 'Krypto - Alerts',
         loggedInAccessOnly: true
@@ -112,7 +122,7 @@ const router = createRouter({
     {
       path: '/404',
       name: '404',
-      component: () => import('../views/public/404.vue'),
+      component: () => import('./views/public/404.vue'),
       meta: {
           title: 'Krypto - 404 Page Not Found'
       }

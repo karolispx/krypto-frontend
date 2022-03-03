@@ -58,6 +58,7 @@
             </div>
           </div>
         </div>
+        
       </div>
 
       <CreateAlertModal v-on:reload-alerts="loadAlerts"/>
