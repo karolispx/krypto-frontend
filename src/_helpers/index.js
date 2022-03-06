@@ -3,7 +3,7 @@ export const config = {
   'defaultMessages': {
     'error': 'Something went wrong. Please try again later.',
   },
-  'apiUrl': 'http://localhost:8080/api',
+  'apiUrl': 'https://final-project-krypto.herokuapp.com/api',
   'appUrl': 'http://localhost:3000/',
 };
 
