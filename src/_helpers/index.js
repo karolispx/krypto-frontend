@@ -4,7 +4,8 @@ export const config = {
     'error': 'Something went wrong. Please try again later.',
   },
   'apiUrl': 'https://final-project-krypto.herokuapp.com/api',
-  'appUrl': 'https://final-project-krypto.netlify.app/',
+  // 'apiUrl': 'http://localhost:8080/api',
+  'appUrl': 'http://krypto-project.online/',
 };
 
 // Add request header
