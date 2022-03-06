@@ -207,7 +207,7 @@ export const APISettings = {
             state.cryptocurrency = null;
         },
         getAPITokenSuccess(state, response) {
-            state.endpoint = config.appUrl + "endpoint-dashboard/" + response.token;
+            state.endpoint = config.appUrl + "dashboard/" + response.token;
             state.tokenID = response._id;
             state.settings = response.settings;
 
