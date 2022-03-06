@@ -55,8 +55,8 @@
     },
     data() {
       return {
-        email: 'k.pliauskys@gmail.com',
-        password: 'secrets',
+        email: '',
+        password: '',
       }
     },
     methods: {
