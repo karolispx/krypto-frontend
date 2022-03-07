@@ -5,7 +5,7 @@
     <app-alert></app-alert>
     
     <div v-if="dashboard && dashboard.coin && dashboard.price">
-      <h1>Coin Price</h1>
+      <h2>Coin Price</h2>
 
       <h3>
         <strong>Coin: </strong> {{ dashboard.coin }}<br>
@@ -16,13 +16,13 @@
     </div>
 
     <div v-else-if="dashboard && dashboard.statistics">
-      <h1>Portfolio Statistics</h1>
+      <h2>Portfolio Statistics</h2>
 
-      <h3>
+      <h4>
         <strong>Value: </strong> {{ currencyFilter(dashboard.statistics.value) }}<br>
         <strong>Cost: </strong> {{ currencyFilter(dashboard.statistics.cost) }}<br>
         <strong>Gains: </strong> {{ currencyFilter(dashboard.statistics.gains) }}<br>
-      </h3>
+      </h4>
 
       <p>Refresh in: {{processTimer}}</p>
     </div>
@@ -114,5 +114,11 @@
         }
       }, 1000)
     },
+
+    mounted() {
+      $( document ).ready(function() {
+          $('footer.footer').hide();
+      });
+    }
   }
 </script>
