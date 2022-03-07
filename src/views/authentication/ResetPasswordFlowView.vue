@@ -118,4 +118,10 @@ div.well{
   max-width: 400px;
   padding: 40px;
 }
+
+@media screen and (max-width: 900px) {
+.Absolute-Center.is-Responsive {
+  width: 100%!important; 
+  }
+}
 </style>

@@ -12,17 +12,17 @@
           <div class="card-header">
 
             <div class="row">
-              <div class="col-md">
+              <div class="col-sm">
                 <h6 class="card-title">Total Value</h6>
                 <h4 class="text-primary">{{ currencyFilter(portfolioStatistics.value) }}</h4>
               </div>
 
-              <div class="col-md text-center">
+              <div class="col-sm text-center">
                 <h6 class="card-title">Cost Basis</h6>
                 <h4 class="text-muted">{{ currencyFilter(portfolioStatistics.cost) }}</h4>
               </div>
 
-              <div class="col-md text-right">
+              <div class="col-sm text-right">
                 <h6 class="card-title">Unrealized Gains</h6>
                 <h4 class="text-success" v-bind:class="{ 'text-danger': (portfolioStatistics.gains < 0) }">{{ currencyFilter(portfolioStatistics.gains) }}</h4>
               </div>
@@ -52,11 +52,11 @@
         <div class="card mt-4">
           <div class="card-header">
             <div class="row">
-              <div class="col-md">
+              <div class="col-sm">
                 <h5 class="card-title">Assets</h5>
               </div>
 
-              <div class="col-md text-right">
+              <div class="col-sm text-right">
                 <button type="button" class="btn btn-primary" v-on:click="openCreateCoinModal">Add Coin</button>
               </div>
             </div>
