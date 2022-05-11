@@ -8,7 +8,11 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      redirect: '/login'
+      component: () => import('./views/public/Home.vue'),
+      meta: {
+        title: 'Krypto - Crypto Portfolio',
+        loggedOutAccessOnly: true
+      }
     },
 
     {

@@ -3,9 +3,9 @@ export const config = {
   'defaultMessages': {
     'error': 'Something went wrong. Please try again later.',
   },
-  'apiUrl': 'https://final-project-krypto.herokuapp.com/api',
-  // 'apiUrl': 'http://localhost:8080/api',
-  'appUrl': 'http://krypto-project.online/',
+  // 'apiUrl': 'https://final-project-krypto.herokuapp.com/api',
+  'apiUrl': 'http://localhost:8080/api',
+  'appUrl': 'http://localhost:3000/',
 };
 
 // Add request header
